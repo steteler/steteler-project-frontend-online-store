@@ -1,11 +1,33 @@
 import React, { Component } from 'react';
-import './App.css';
-// import * as api from './services/api';
+import SearchBar from './components/SearchBar';
 
 class App extends Component {
+  constructor() {
+    super();
+    this.onInputChange = this.onInputChange.bind(this);
+
+    this.state = {
+      inputSearch: '',
+    };
+  }
+
+  onInputChange({ target }) {
+    this.setState(() => ({
+      [target.name]: target.value,
+    }));
+  }
+
   render() {
+    const {
+      inputSearch,
+    } = this.state;
     return (
-      <h1>Hello, world!</h1>
+      <div>
+        <SearchBar
+          inputSearch={ inputSearch }
+          onInputChange={ this.onInputChange }
+        />
+      </div>
     );
   }
 }
