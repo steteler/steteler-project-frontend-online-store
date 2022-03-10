@@ -1,25 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import SearchBar from './components/SearchBar';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={ logo } className="App-logo" alt="logo" />
-        <p>Edit src/App.js and save to reload.</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <p>Qualquer coisa</p>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor() {
+    super();
+    this.onInputChange = this.onInputChange.bind(this);
+
+    this.state = {
+      inputSearch: '',
+    };
+  }
+
+  onInputChange({ target }) {
+    this.setState(() => ({
+      [target.name]: target.value,
+    }));
+  }
+
+  render() {
+    const {
+      inputSearch,
+    } = this.state;
+    return (
+      <div>
+        <SearchBar
+          inputSearch={ inputSearch }
+          onInputChange={ this.onInputChange }
+        />
+      </div>
+    );
+  }
 }
 
 export default App;
