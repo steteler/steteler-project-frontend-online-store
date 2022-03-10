@@ -1,33 +1,17 @@
 import React, { Component } from 'react';
-import SearchBar from './components/SearchBar';
+import { Route, Switch, BrowserRouter } from 'react-router-dom';
+import Cart from './pages/Cart';
+import Home from './pages/Home';
 
 class App extends Component {
-  constructor() {
-    super();
-    this.onInputChange = this.onInputChange.bind(this);
-
-    this.state = {
-      inputSearch: '',
-    };
-  }
-
-  onInputChange({ target }) {
-    this.setState(() => ({
-      [target.name]: target.value,
-    }));
-  }
-
   render() {
-    const {
-      inputSearch,
-    } = this.state;
     return (
-      <div>
-        <SearchBar
-          inputSearch={ inputSearch }
-          onInputChange={ this.onInputChange }
-        />
-      </div>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/cart" component={ Cart } />
+          <Route exact path="/" component={ Home } />
+        </Switch>
+      </BrowserRouter>
     );
   }
 }
