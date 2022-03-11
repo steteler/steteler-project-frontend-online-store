@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Card from '../components/Card';
 import Header from '../components/Header';
 import SearchBar from '../components/SearchBar';
 import * as api from '../services/api';
@@ -10,6 +11,8 @@ export default class Home extends Component {
     this.state = {
       inputSearch: '',
       categories: [],
+      searchResults: [],
+      isResultEmpty: false,
     };
   }
 
@@ -22,6 +25,13 @@ export default class Home extends Component {
     this.setState({ categories: response });
   }
 
+  search = async () => {
+    const { inputSearch } = this.state;
+    const data = await api.getProductsFromCategoryAndQuery('', inputSearch);
+    const result = data.results;
+    this.setState({ searchResults: result, isResultEmpty: result.length === 0 });
+  }
+
   onInputChange = ({ target }) => {
     this.setState(() => ({
       [target.name]: target.value,
@@ -32,11 +42,14 @@ export default class Home extends Component {
     const { categories } = this.state;
     const {
       inputSearch,
+      searchResults,
+      isResultEmpty,
     } = this.state;
     return (
       <div>
         <Header />
         <SearchBar
+          handleSearch={ this.search }
           inputSearch={ inputSearch }
           onInputChange={ this.onInputChange }
         />
@@ -53,6 +66,12 @@ export default class Home extends Component {
               </label>
             </div>
           ))}
+        </div>
+
+        <div>
+          { !isResultEmpty
+            ? searchResults.map((product) => <Card key={ product.id } { ...product } />)
+            : 'Nenhum produto foi encontrado'}
         </div>
       </div>
     );
