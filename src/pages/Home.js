@@ -27,8 +27,8 @@ export default class Home extends Component {
 
   search = async () => {
     const { inputSearch } = this.state;
-    const result = await api.getProductsByQuery(inputSearch);
-    console.log(result);
+    const data = await api.getProductsFromCategoryAndQuery('', inputSearch);
+    const result = data.results;
     this.setState({ searchResults: result, isResultEmpty: result.length === 0 });
   }
 
