@@ -13,6 +13,7 @@ export default class Home extends Component {
       categories: [],
       searchResults: [],
       isResultEmpty: false,
+      selectedCategory: '',
     };
   }
 
@@ -21,13 +22,18 @@ export default class Home extends Component {
   }
 
   requestCategories = async () => {
-    const response = await api.getCategories();
-    this.setState({ categories: response });
+    const categories = await api.getCategories();
+    this.setState({ categories, selectedCategory: categories[0].id },
+      () => this.search());
   }
 
   search = async () => {
-    const { inputSearch } = this.state;
-    const data = await api.getProductsFromCategoryAndQuery('', inputSearch);
+    const { inputSearch, selectedCategory } = this.state;
+    const data = await api.getProductsFromCategoryAndQuery(
+      selectedCategory,
+      inputSearch,
+    );
+
     const result = data.results;
     this.setState({ searchResults: result, isResultEmpty: result.length === 0 });
   }
@@ -39,11 +45,12 @@ export default class Home extends Component {
   }
 
   render() {
-    const { categories } = this.state;
     const {
       inputSearch,
       searchResults,
       isResultEmpty,
+      categories,
+      selectedCategory,
     } = this.state;
     return (
       <div>
@@ -58,9 +65,12 @@ export default class Home extends Component {
             <div key={ id }>
               <label htmlFor={ id } data-testid="category">
                 <input
+                  checked={ selectedCategory === id }
                   id={ id }
                   type="radio"
-                  value={ name }
+                  value={ id }
+                  name="selectedCategory"
+                  onChange={ this.onInputChange }
                 />
                 {name}
               </label>
