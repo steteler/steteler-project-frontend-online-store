@@ -13,6 +13,7 @@ export default class Home extends Component {
       categories: [],
       searchResults: [],
       isResultEmpty: false,
+      selectedCategory: '',
     };
   }
 
@@ -26,13 +27,19 @@ export default class Home extends Component {
   }
 
   search = async () => {
-    const { inputSearch } = this.state;
-    const data = await api.getProductsFromCategoryAndQuery('', inputSearch);
+    const { inputSearch, selectedCategory } = this.state;
+    const data = await api.getProductsFromCategoryAndQuery(
+      selectedCategory.id,
+      inputSearch,
+    );
+
     const result = data.results;
+    console.log(inputSearch);
     this.setState({ searchResults: result, isResultEmpty: result.length === 0 });
   }
 
   onInputChange = ({ target }) => {
+    console.log(target.value);
     this.setState(() => ({
       [target.name]: target.value,
     }));
@@ -60,7 +67,9 @@ export default class Home extends Component {
                 <input
                   id={ id }
                   type="radio"
-                  value={ name }
+                  value={ id }
+                  name="selectedCategory"
+                  onChange={ this.onInputChange }
                 />
                 {name}
               </label>
