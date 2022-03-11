@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Card from '../components/Card';
 import Header from '../components/Header';
 import SearchBar from '../components/SearchBar';
@@ -80,8 +81,16 @@ export default class Home extends Component {
 
         <div>
           { !isResultEmpty
-            ? searchResults.map((product) => <Card key={ product.id } { ...product } />)
-            : 'Nenhum produto foi encontrado'}
+            ? searchResults.map((product) => (
+              <Link
+                key={ product.id }
+                to={ `/product-details/${product.id}` }
+                data-testid="product-detail-link"
+              >
+                <Card { ...product } />
+              </Link>
+            ))
+            : <div>Nenhum produto foi encontrado</div>}
         </div>
       </div>
     );
