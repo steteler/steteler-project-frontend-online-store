@@ -31,7 +31,11 @@ export default class ProductDetails extends Component {
         <Header />
         <h1>{title}</h1>
         <div><img src={ thumbnail } alt={ title } /></div>
-        <button onClick={ (event) => addToCart(event, productId) } type="button" data-testid="product-detail-add-to-cart">
+        <button
+          onClick={ (event) => addToCart(event, productId) }
+          type="button"
+          data-testid="product-detail-add-to-cart"
+        >
           Adicionar ao carrinho
         </button>
       </div>

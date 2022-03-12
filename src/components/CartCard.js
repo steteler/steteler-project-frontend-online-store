@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { getProductDetails } from '../services/api';
 
 export default class CartCard extends Component {
@@ -28,3 +29,7 @@ export default class CartCard extends Component {
     );
   }
 }
+
+CartCard.propTypes = {
+  id: PropTypes.string.isRequired,
+};
