@@ -1,16 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import addToCart from '../services/cartHandler';
 
 export default class Card extends Component {
-  addToCart = (event, id) => {
-    event.preventDefault();
-    let cart = JSON.parse(localStorage.getItem('cart'));
-    if (cart === null) cart = [];
-    const newCart = [...cart, id];
-    localStorage.setItem('cart',
-      JSON.stringify(newCart));
-  }
-
   render() {
     const { price, title, thumbnail, id } = this.props;
     return (
@@ -23,7 +15,7 @@ export default class Card extends Component {
         <button
           type="button"
           data-testid="product-add-to-cart"
-          onClick={ (event) => this.addToCart(event, id) }
+          onClick={ (event) => addToCart(event, id) }
         >
           Adicionar ao carrinho
         </button>
