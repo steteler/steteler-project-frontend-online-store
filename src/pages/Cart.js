@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import CartCard from '../components/CartCard';
-import { getCart } from '../services/cartHandler';
+import { getCart, updateCartItem } from '../services/cartHandler';
 
 export default class Cart extends Component {
   constructor() {
@@ -15,16 +15,20 @@ export default class Cart extends Component {
     this.getCartProducts();
   }
 
-  getCartProducts() {
+  getCartProducts = () => {
     const items = getCart();
     this.setState({ items, count: items !== null ? items.length : 0 });
+  }
+
+  updateItem = (product, quantity) => {
+    updateCartItem(product.id, quantity);
+    this.getCartProducts();
   }
 
   render() {
     const { items, count } = this.state;
     return (
       <div>
-        <h2 data-testid="shopping-cart-product-quantity">{count}</h2>
         {
           count === 0
             ? (
@@ -34,7 +38,12 @@ export default class Cart extends Component {
             )
             : (
               <div>
-                {items.map((id) => <CartCard key={ id } id={ id } />)}
+                {items.map(({ product, quantity }) => (<CartCard
+                  key={ product.id }
+                  product={ product }
+                  quantity={ quantity }
+                  updateItem={ this.updateItem }
+                />))}
               </div>
             )
         }
