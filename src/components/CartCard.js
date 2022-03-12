@@ -13,14 +13,14 @@ export default class CartCard extends Component {
     this.requestProduct();
   }
 
-  requestProduct = () => {
+  requestProduct = async () => {
     const { id } = this.props;
-    const product = getProductDetails(id);
+    const product = await getProductDetails(id);
     this.setState({ product });
   }
 
   render() {
-    const { product: { title } } = this.state;
+    const { product, product: { title } } = this.state;
     return (
       <div>
         <h3 data-testid="shopping-cart-product-name">{title}</h3>

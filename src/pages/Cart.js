@@ -31,7 +31,7 @@ export default class Cart extends Component {
             )
             : (
               <div>
-                {items.map(({ id }) => <CartCard key={ id } id={ id } />)}
+                {items.map((id) => <CartCard key={ id } id={ id } />)}
               </div>
             )
         }
