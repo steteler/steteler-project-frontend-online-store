@@ -6,6 +6,7 @@ export default class Cart extends Component {
     super();
     this.state = {
       items: [],
+      count: 0,
     };
   }
 
@@ -15,15 +16,16 @@ export default class Cart extends Component {
 
   getCartProducts() {
     const items = JSON.parse(localStorage.getItem('cart'));
-    this.setState({ items });
+    this.setState({ items, count: items !== null ? items.length : 0 });
   }
 
   render() {
-    const { items } = this.state;
+    const { items, count } = this.state;
     return (
       <div>
+        <h2 data-testid="shopping-cart-product-quantity">{count}</h2>
         {
-          items === null || items.length === 0
+          count === 0
             ? (
               <span data-testid="shopping-cart-empty-message">
                 Seu carrinho está vazio

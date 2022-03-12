@@ -20,7 +20,7 @@ export default class CartCard extends Component {
   }
 
   render() {
-    const { product, product: { title } } = this.state;
+    const { product: { title } } = this.state;
     return (
       <div>
         <h3 data-testid="shopping-cart-product-name">{title}</h3>

@@ -1,6 +1,6 @@
 const addToCart = (event, id) => {
   event.preventDefault();
-  let cart = localStorage.getItem('cart');
+  let cart = JSON.parse(localStorage.getItem('cart'));
   if (cart === null) cart = [];
   const newCart = [...cart, id];
   localStorage.setItem('cart',
