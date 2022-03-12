@@ -7,4 +7,6 @@ const addToCart = (event, id) => {
     JSON.stringify(newCart));
 };
 
-export default addToCart;
+const getCart = () => JSON.parse(localStorage.getItem('cart'));
+
+export { addToCart, getCart };

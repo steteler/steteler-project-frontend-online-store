@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import CartCard from '../components/CartCard';
+import { getCart } from '../services/cartHandler';
 
 export default class Cart extends Component {
   constructor() {
@@ -15,7 +16,7 @@ export default class Cart extends Component {
   }
 
   getCartProducts() {
-    const items = JSON.parse(localStorage.getItem('cart'));
+    const items = getCart();
     this.setState({ items, count: items !== null ? items.length : 0 });
   }
 

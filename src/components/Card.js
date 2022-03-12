@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import addToCart from '../services/cartHandler';
+import { addToCart } from '../services/cartHandler';
 
 export default class Card extends Component {
   render() {

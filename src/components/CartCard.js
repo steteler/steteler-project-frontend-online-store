@@ -24,7 +24,6 @@ export default class CartCard extends Component {
     return (
       <div>
         <h3 data-testid="shopping-cart-product-name">{title}</h3>
-        <span data-testid="shopping-cart-product-quantity" />
       </div>
     );
   }

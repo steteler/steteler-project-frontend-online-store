@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { getProductDetails } from '../services/api';
 import Header from '../components/Header';
-import addToCart from '../services/cartHandler';
+import { addToCart } from '../services/cartHandler';
 
 export default class ProductDetails extends Component {
   constructor(props) {
