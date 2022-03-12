@@ -4,7 +4,7 @@ import { addToCart } from '../services/cartHandler';
 
 export default class Card extends Component {
   render() {
-    const { price, title, thumbnail, id } = this.props;
+    const { product, product: { price, title, thumbnail } } = this.props;
     return (
       <div data-testid="product">
         <div>
@@ -15,7 +15,10 @@ export default class Card extends Component {
         <button
           type="button"
           data-testid="product-add-to-cart"
-          onClick={ (event) => addToCart(event, id) }
+          onClick={ (event) => {
+            event.preventDefault();
+            addToCart(product, 1);
+          } }
         >
           Adicionar ao carrinho
         </button>

@@ -25,14 +25,17 @@ export default class ProductDetails extends Component {
   }
 
   render() {
-    const { product: { title, thumbnail, productId } } = this.state;
+    const { product, product: { title, thumbnail } } = this.state;
     return (
       <div data-testid="product-detail-name">
         <Header />
         <h1>{title}</h1>
         <div><img src={ thumbnail } alt={ title } /></div>
         <button
-          onClick={ (event) => addToCart(event, productId) }
+          onClick={ (event) => {
+            event.preventDefault();
+            addToCart(product, 1);
+          } }
           type="button"
           data-testid="product-detail-add-to-cart"
         >

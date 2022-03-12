@@ -88,7 +88,7 @@ export default class Home extends Component {
                   to={ `/product-details/${product.id}` }
                   data-testid="product-detail-link"
                 >
-                  <Card { ...product } />
+                  <Card product={ product } />
                 </Link>
               </div>
             ))
