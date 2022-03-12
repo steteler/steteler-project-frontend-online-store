@@ -1,10 +1,43 @@
 import React, { Component } from 'react';
+import CartCard from '../components/CartCard';
+import { getCart } from '../services/cartHandler';
 
 export default class Cart extends Component {
+  constructor() {
+    super();
+    this.state = {
+      items: [],
+      count: 0,
+    };
+  }
+
+  componentDidMount() {
+    this.getCartProducts();
+  }
+
+  getCartProducts() {
+    const items = getCart();
+    this.setState({ items, count: items !== null ? items.length : 0 });
+  }
+
   render() {
+    const { items, count } = this.state;
     return (
       <div>
-        <span data-testid="shopping-cart-empty-message">Seu carrinho está vazio</span>
+        <h2 data-testid="shopping-cart-product-quantity">{count}</h2>
+        {
+          count === 0
+            ? (
+              <span data-testid="shopping-cart-empty-message">
+                Seu carrinho está vazio
+              </span>
+            )
+            : (
+              <div>
+                {items.map((id) => <CartCard key={ id } id={ id } />)}
+              </div>
+            )
+        }
       </div>
     );
   }
