@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { addToCart } from '../services/localStorageHandler';
 
-export default class Card extends Component {
+export default class ProductCard extends Component {
   render() {
     const { product, product: { price, title, thumbnail } } = this.props;
     return (
@@ -28,7 +28,7 @@ export default class Card extends Component {
   }
 }
 
-Card.propTypes = {
+ProductCard.propTypes = {
   price: PropTypes.number,
   title: PropTypes.string,
   thumbnail: PropTypes.string,

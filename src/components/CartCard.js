@@ -28,19 +28,19 @@ export default class CartCard extends Component {
         <img src={ thumbnail } alt={ title } />
         <h3 data-testid="shopping-cart-product-name">{title}</h3>
         <button
-          onClick={ () => updateItem(product, quantity + 1) }
-          data-testid="product-increase-quantity"
-          type="button"
-        >
-          +
-        </button>
-        <span data-testid="shopping-cart-product-quantity">{quantity}</span>
-        <button
           onClick={ () => updateItem(product, quantity - 1) }
           data-testid="product-decrease-quantity"
           type="button"
         >
           -
+        </button>
+        <span data-testid="shopping-cart-product-quantity">{quantity}</span>
+        <button
+          onClick={ () => updateItem(product, quantity + 1) }
+          data-testid="product-increase-quantity"
+          type="button"
+        >
+          +
         </button>
       </div>
     );

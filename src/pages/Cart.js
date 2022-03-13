@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import CartCard from '../components/CartCard';
-import { getCart, updateCartItem } from '../services/localStorageHandler';
+import { getFullCart, updateCartItem } from '../services/localStorageHandler';
 
 export default class Cart extends Component {
   constructor() {
@@ -16,7 +17,7 @@ export default class Cart extends Component {
   }
 
   getCartProducts = () => {
-    const items = getCart();
+    const items = getFullCart();
     this.setState({ items, count: items !== null ? items.length : 0 });
   }
 
@@ -29,8 +30,8 @@ export default class Cart extends Component {
     const { items, count } = this.state;
     return (
       <div>
-        {
-          count === 0
+        <section>
+          {count === 0
             ? (
               <span data-testid="shopping-cart-empty-message">
                 Seu carrinho está vazio
@@ -45,8 +46,15 @@ export default class Cart extends Component {
                   updateItem={ this.updateItem }
                 />))}
               </div>
-            )
-        }
+            )}
+        </section>
+        <div>
+          <Link to="/checkout" data-testid="checkout-products">
+            <button type="button">
+              Finalizar compra
+            </button>
+          </Link>
+        </div>
       </div>
     );
   }
