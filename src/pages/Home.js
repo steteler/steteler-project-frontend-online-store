@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Card from '../components/Card';
+import ProductCard from '../components/ProductCard';
 import Header from '../components/Header';
 import SearchBar from '../components/SearchBar';
 import * as api from '../services/api';
@@ -87,7 +87,7 @@ export default class Home extends Component {
                   to={ `/product-details/${product.id}` }
                   data-testid="product-detail-link"
                 >
-                  <Card product={ product } />
+                  <ProductCard product={ product } />
                 </Link>
               </div>
             ))
