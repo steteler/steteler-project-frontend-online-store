@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { getFullCart } from '../services/localStorageHandler';
 
 export default class Checkout extends Component {
@@ -46,7 +47,7 @@ export default class Checkout extends Component {
               <hr />
             </div>
           ))}
-          <div>{`Total: ${total}`}</div>
+          <div>{`Total: R$ ${total}`}</div>
         </div>
         <div>
           <form>
@@ -107,3 +108,16 @@ export default class Checkout extends Component {
     );
   }
 }
+
+Checkout.propTypes = {
+  listOfProducts: PropTypes.array,
+  total: PropTypes.number,
+  form: PropTypes.shape({
+    fullname: PropTypes.string,
+    email: PropTypes.string,
+    cpf: PropTypes.string,
+    phone: PropTypes.string,
+    cep: PropTypes.string,
+    address: PropTypes.string,
+  }),
+}.isRequired;
