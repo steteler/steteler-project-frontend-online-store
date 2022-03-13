@@ -36,7 +36,6 @@ export default class Home extends Component {
     );
 
     const result = data.results;
-    // console.log(result);
     this.setState({ searchResults: result, isResultEmpty: result.length === 0 });
   }
 
