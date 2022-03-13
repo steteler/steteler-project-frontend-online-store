@@ -26,6 +26,10 @@ export default class Checkout extends Component {
     }, 0)
   )
 
+  handleFormCheckout = ({ target: { name, value } }) => {
+    this.setState(({ form }) => ({ form: { ...form, [name]: value } }));
+  }
+
   render() {
     const { listOfProducts, total,
       form: { fullname, email, cpf, phone, cep, address } } = this.state;
@@ -54,6 +58,7 @@ export default class Checkout extends Component {
                 type="text"
                 value={ fullname }
                 placeholder="Nome Completo"
+                onChange={ this.handleFormCheckout }
               />
               <input
                 name="email"
@@ -61,6 +66,7 @@ export default class Checkout extends Component {
                 type="email"
                 value={ email }
                 placeholder="Email"
+                onChange={ this.handleFormCheckout }
               />
               <input
                 name="cpf"
@@ -68,6 +74,7 @@ export default class Checkout extends Component {
                 type="text"
                 value={ cpf }
                 placeholder="CPF"
+                onChange={ this.handleFormCheckout }
               />
               <input
                 name="phone"
@@ -75,6 +82,7 @@ export default class Checkout extends Component {
                 type="text"
                 value={ phone }
                 placeholder="Telefone"
+                onChange={ this.handleFormCheckout }
               />
               <input
                 name="cep"
@@ -82,6 +90,7 @@ export default class Checkout extends Component {
                 type="text"
                 value={ cep }
                 placeholder="CEP"
+                onChange={ this.handleFormCheckout }
               />
               <input
                 name="address"
@@ -89,6 +98,7 @@ export default class Checkout extends Component {
                 type="text"
                 value={ address }
                 placeholder="Endereço"
+                onChange={ this.handleFormCheckout }
               />
             </fieldset>
           </form>
