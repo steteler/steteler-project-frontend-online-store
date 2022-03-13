@@ -22,17 +22,19 @@ const updateCartItem = (id, quantity) => {
     JSON.stringify(cart));
 };
 
-const getCart = () => JSON.parse(localStorage.getItem('cart'));
+const getFullCart = () => JSON.parse(localStorage.getItem('cart'));
 
 const getItem = (id) => {
   const cart = JSON.parse(localStorage.getItem('cart'));
   return cart.find((item) => id === item.id);
 };
 
-const saveLocalStorageRating = (ratingPram) => {
+/* Funções relacionadas a avaliação dos produtos */
+
+const saveLocalStorageRating = (ratingParam) => {
   let ratings = JSON.parse(localStorage.getItem('productRating'));
   if (ratings === null) ratings = '[]';
-  const newRating = [...ratings, ratingPram];
+  const newRating = [...ratings, ratingParam];
   localStorage.setItem('productRating',
     JSON.stringify(newRating));
 };
@@ -43,5 +45,5 @@ const getLocalStorageRating = () => {
   return result;
 };
 
-export { addToCart, getCart, updateCartItem, getItem,
+export { addToCart, getFullCart, updateCartItem, getItem,
   saveLocalStorageRating, getLocalStorageRating };
