@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import CartCard from '../components/CartCard';
-import { getCart, updateCartItem } from '../services/cartHandler';
+import { getCart, updateCartItem } from '../services/localStorageHandler';
 
 export default class Cart extends Component {
   constructor() {
