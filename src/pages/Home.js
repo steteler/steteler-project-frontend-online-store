@@ -4,6 +4,7 @@ import ProductCard from '../components/ProductCard';
 import Header from '../components/Header';
 import SearchBar from '../components/SearchBar';
 import * as api from '../services/api';
+import { addToCart, getCartItemsQuantity } from '../services/localStorageHandler';
 
 export default class Home extends Component {
   constructor() {
@@ -15,6 +16,7 @@ export default class Home extends Component {
       searchResults: [],
       isResultEmpty: false,
       selectedCategoryId: '',
+      cartSize: getCartItemsQuantity(),
     };
   }
 
@@ -45,6 +47,11 @@ export default class Home extends Component {
     }));
   }
 
+  addItemToCart = (product, quantity) => {
+    addToCart(product, quantity);
+    this.setState({ cartSize: getCartItemsQuantity() });
+  }
+
   render() {
     const {
       inputSearch,
@@ -52,10 +59,11 @@ export default class Home extends Component {
       isResultEmpty,
       categories,
       selectedCategoryId,
+      cartSize,
     } = this.state;
     return (
       <div>
-        <Header />
+        <Header cartSize={ cartSize } />
         <SearchBar
           handleSearch={ this.search }
           inputSearch={ inputSearch }
@@ -87,7 +95,7 @@ export default class Home extends Component {
                   to={ `/product-details/${product.id}` }
                   data-testid="product-detail-link"
                 >
-                  <ProductCard product={ product } />
+                  <ProductCard product={ product } addItemToCart={ this.addItemToCart } />
                 </Link>
               </div>
             ))
