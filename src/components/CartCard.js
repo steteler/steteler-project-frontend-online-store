@@ -2,11 +2,17 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { getProductDetails } from '../services/api';
 
+const DECREASE = -1;
+const INCREASE = 1;
+
 export default class CartCard extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       thumbnail: '',
+      product: props.product,
+      availableQuantity: props.product.available_quantity,
+      quantity: props.quantity,
     };
   }
 
@@ -20,25 +26,35 @@ export default class CartCard extends Component {
     this.setState({ thumbnail: product.thumbnail });
   }
 
+  changeItemQuantity = (param) => {
+    const { product, availableQuantity, quantity } = this.state;
+    const { updateItem } = this.props;
+    if (quantity + param > availableQuantity || quantity + param < 1) return;
+    const result = quantity + param;
+    this.setState({ quantity: result });
+    updateItem(product, result);
+  }
+
   render() {
-    const { thumbnail } = this.state;
-    const { product, product: { title }, quantity, updateItem } = this.props;
+    const { product: { title }, quantity, availableQuantity, thumbnail } = this.state;
     return (
       <div>
         <img src={ thumbnail } alt={ title } />
         <h3 data-testid="shopping-cart-product-name">{title}</h3>
         <button
-          onClick={ () => updateItem(product, quantity - 1) }
+          onClick={ () => { this.changeItemQuantity(DECREASE); } }
           data-testid="product-decrease-quantity"
           type="button"
+          disabled={ quantity <= 1 }
         >
           -
         </button>
         <span data-testid="shopping-cart-product-quantity">{quantity}</span>
         <button
-          onClick={ () => updateItem(product, quantity + 1) }
+          onClick={ () => this.changeItemQuantity(INCREASE) }
           data-testid="product-increase-quantity"
           type="button"
+          disabled={ quantity >= availableQuantity }
         >
           +
         </button>
