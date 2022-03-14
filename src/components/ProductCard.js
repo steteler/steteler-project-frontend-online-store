@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { addToCart } from '../services/localStorageHandler';
 
 export default class ProductCard extends Component {
   render() {
-    const { product, product: { price, title, thumbnail } } = this.props;
+    const { product, product: { price, title, thumbnail }, addItemToCart } = this.props;
     return (
       <div data-testid="product">
         <div>
@@ -17,7 +16,7 @@ export default class ProductCard extends Component {
           data-testid="product-add-to-cart"
           onClick={ (event) => {
             event.preventDefault();
-            addToCart(product, 1);
+            addItemToCart(product, 1);
           } }
         >
           Adicionar ao carrinho

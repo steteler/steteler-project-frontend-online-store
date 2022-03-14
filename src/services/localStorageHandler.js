@@ -2,15 +2,6 @@ const getFullCart = () => JSON.parse(localStorage.getItem('cart'));
 
 const getProductRating = () => JSON.parse(localStorage.getItem('productRating'));
 
-const addToCart = (product, quantity) => {
-  let cart = getFullCart();
-  if (cart === null) cart = [];
-  if (cart.some((item) => item.product.id === product.id)) return;
-  const newCart = [...cart, { product, quantity }];
-  localStorage.setItem('cart',
-    JSON.stringify(newCart));
-};
-
 const updateCartItem = (id, quantity) => {
   let cart = getFullCart();
   if (cart === null) cart = [];
@@ -24,6 +15,28 @@ const updateCartItem = (id, quantity) => {
 
   localStorage.setItem('cart',
     JSON.stringify(cart));
+};
+
+const addToCart = (product, quantity) => {
+  let cart = getFullCart();
+  if (cart === null) cart = [];
+  let productQuantity = 0;
+  if (cart.some((item) => {
+    productQuantity = item.quantity;
+    return item.product.id === product.id;
+  })) {
+    updateCartItem(product.id, productQuantity + 1);
+    return;
+  }
+  const newCart = [...cart, { product, quantity }];
+  localStorage.setItem('cart',
+    JSON.stringify(newCart));
+};
+
+const getCartItemsQuantity = () => {
+  let cart = getFullCart();
+  if (cart === null) cart = [];
+  return cart.reduce(((accumulator, item) => accumulator + item.quantity), 0);
 };
 
 const getItem = (id) => {
@@ -47,5 +60,7 @@ const getLocalStorageRating = () => {
   return result;
 };
 
-export { addToCart, getFullCart, updateCartItem, getItem,
-  saveLocalStorageRating, getLocalStorageRating };
+export {
+  addToCart, getFullCart, updateCartItem, getItem,
+  saveLocalStorageRating, getLocalStorageRating, getCartItemsQuantity,
+};

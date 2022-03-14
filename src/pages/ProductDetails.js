@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { getProductDetails } from '../services/api';
 import Header from '../components/Header';
 import { addToCart, saveLocalStorageRating,
-  getLocalStorageRating } from '../services/localStorageHandler';
+  getLocalStorageRating, getCartItemsQuantity } from '../services/localStorageHandler';
 
 export default class ProductDetails extends Component {
   constructor(props) {
@@ -16,6 +16,7 @@ export default class ProductDetails extends Component {
       productRate: '',
       detailEvaluation: '',
       rates: [],
+      cartSize: getCartItemsQuantity(),
     };
   }
 
@@ -49,19 +50,24 @@ export default class ProductDetails extends Component {
     this.setState({ rates: ratings.filter(({ productId: id }) => id === productId) });
   }
 
+  addItemToCart = (product, quantity) => {
+    addToCart(product, quantity);
+    this.setState({ cartSize: getCartItemsQuantity() });
+  }
+
   render() {
     const { product, product: { title, thumbnail }, detailEmail,
-      detailEvaluation, productRate, rates } = this.state;
+      detailEvaluation, productRate, rates, cartSize } = this.state;
     return (
       <div data-testid="product-detail-name">
-        <Header />
+        <Header cartSize={ cartSize } />
         <div>
           <h1>{title}</h1>
           <div><img src={ thumbnail } alt={ title } /></div>
           <button
             onClick={ (event) => {
               event.preventDefault();
-              addToCart(product, 1);
+              this.addItemToCart(product, 1);
             } }
             type="button"
             data-testid="product-detail-add-to-cart"
