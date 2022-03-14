@@ -6,6 +6,13 @@ const addToCart = (product, quantity) => {
   localStorage.setItem('cart',
     JSON.stringify(newCart));
 };
+const getFullCart = () => JSON.parse(localStorage.getItem('cart'));
+
+const getCartItemsQuantity = () => {
+  let cart = getFullCart();
+  if (cart === null) cart = [];
+  return cart.reduce(((accumulator, item) => accumulator + item.quantity), 0);
+};
 
 const updateCartItem = (id, quantity) => {
   let cart = JSON.parse(localStorage.getItem('cart'));
@@ -21,8 +28,6 @@ const updateCartItem = (id, quantity) => {
   localStorage.setItem('cart',
     JSON.stringify(cart));
 };
-
-const getFullCart = () => JSON.parse(localStorage.getItem('cart'));
 
 const getItem = (id) => {
   const cart = JSON.parse(localStorage.getItem('cart'));
@@ -45,5 +50,7 @@ const getLocalStorageRating = () => {
   return result;
 };
 
-export { addToCart, getFullCart, updateCartItem, getItem,
-  saveLocalStorageRating, getLocalStorageRating };
+export {
+  addToCart, getFullCart, updateCartItem, getItem,
+  saveLocalStorageRating, getLocalStorageRating, getCartItemsQuantity,
+};
