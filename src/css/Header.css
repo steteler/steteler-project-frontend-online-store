@@ -1,0 +1,36 @@
+* {
+  box-sizing: border-box;
+}
+
+.main-header {
+  background-color: white;
+  justify-content: right;
+  margin: 0 16px;
+  padding: 12px 0;
+}
+
+.header-cart-container {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-shopping-cart-image {
+  width: 32px;
+}
+
+
+.header-shopping-cart {
+  position: relative;
+}
+
+.cartsize {
+  background-color: orange;
+  border-radius: 4px;
+  bottom: 24px;
+  color: white;
+  font-size: 10px;
+  left: 20px;
+  padding: 4px;
+  position: absolute;
+}

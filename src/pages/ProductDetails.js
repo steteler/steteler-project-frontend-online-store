@@ -62,8 +62,8 @@ export default class ProductDetails extends Component {
       <div data-testid="product-detail-name">
         <Header cartSize={ cartSize } />
         <div>
-          <h1>{title}</h1>
           <div><img src={ thumbnail } alt={ title } /></div>
+          <h1>{title}</h1>
           <button
             onClick={ (event) => {
               event.preventDefault();

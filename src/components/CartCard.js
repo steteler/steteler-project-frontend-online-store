@@ -38,10 +38,12 @@ export default class CartCard extends Component {
   render() {
     const { product: { title }, quantity, availableQuantity, thumbnail } = this.state;
     return (
-      <div>
+      <div id="cart-card">
         <img src={ thumbnail } alt={ title } />
         <h3 data-testid="shopping-cart-product-name">{title}</h3>
         <button
+          className="quantity-button"
+          id="cart-card-decrease-button"
           onClick={ () => { this.changeItemQuantity(DECREASE); } }
           data-testid="product-decrease-quantity"
           type="button"
@@ -51,6 +53,8 @@ export default class CartCard extends Component {
         </button>
         <span data-testid="shopping-cart-product-quantity">{quantity}</span>
         <button
+          className="quantity-button"
+          id="cart-card-increase-button"
           onClick={ () => this.changeItemQuantity(INCREASE) }
           data-testid="product-increase-quantity"
           type="button"

@@ -1,0 +1,35 @@
+.home-items-container {
+  display: flex;
+  flex-grow: 1;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 65%;
+}
+
+.categories {
+  padding: 8px 0;
+  width: 300px;
+}
+
+.home-content {
+  align-items: flex-start;
+  display: flex;
+}
+
+.free-shipping {
+  width: 30px;
+}
+
+.product-card {
+  align-items: center;
+  border: 1px solid orange;
+  border-radius: 4px;
+  color: orange;
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+  margin: 4px;
+  padding: 20px;
+  text-decoration: none;
+  width: 200px;
+}

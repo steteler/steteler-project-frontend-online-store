@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import SearchBar from '../components/SearchBar';
 import * as api from '../services/api';
 import { addToCart, getCartItemsQuantity } from '../services/localStorageHandler';
+import '../css/Home.css';
 
 export default class Home extends Component {
   constructor() {
@@ -62,45 +63,51 @@ export default class Home extends Component {
       cartSize,
     } = this.state;
     return (
-      <div>
+      <div className="home">
         <Header cartSize={ cartSize } />
         <SearchBar
           handleSearch={ this.search }
           inputSearch={ inputSearch }
           onInputChange={ this.onInputChange }
         />
-        <div>
-          {categories.map(({ id, name }) => (
-            <div key={ id }>
-              <label htmlFor={ id } data-testid="category">
-                <input
-                  checked={ selectedCategoryId === id }
-                  id={ id }
-                  type="radio"
-                  value={ id }
-                  name="selectedCategoryId"
-                  onChange={ this.onInputChange }
-                />
-                {name}
-              </label>
-            </div>
-          ))}
-        </div>
-
-        <div>
-          { !isResultEmpty
-            ? searchResults.map((product) => (
-              <div key={ product.id }>
-                <Link
-                  to={ `/product-details/${product.id}` }
-                  data-testid="product-detail-link"
-                >
-                  <ProductCard product={ product } addItemToCart={ this.addItemToCart } />
-                </Link>
+        <main className="home-content">
+          <div className="categories">
+            {categories.map(({ id, name }) => (
+              <div key={ id }>
+                <label htmlFor={ id } data-testid="category">
+                  <input
+                    checked={ selectedCategoryId === id }
+                    id={ id }
+                    type="radio"
+                    value={ id }
+                    name="selectedCategoryId"
+                    onChange={ this.onInputChange }
+                  />
+                  {name}
+                </label>
               </div>
-            ))
-            : <div>Nenhum produto foi encontrado</div>}
-        </div>
+            ))}
+          </div>
+
+          <div className="home-items-container">
+            { !isResultEmpty
+              ? searchResults.map((product) => (
+                <div key={ product.id }>
+                  <Link
+                    className="product-card"
+                    to={ `/product-details/${product.id}` }
+                    data-testid="product-detail-link"
+                  >
+                    <ProductCard
+                      product={ product }
+                      addItemToCart={ this.addItemToCart }
+                    />
+                  </Link>
+                </div>
+              ))
+              : <div>Nenhum produto foi encontrado</div>}
+          </div>
+        </main>
       </div>
     );
   }

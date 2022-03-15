@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import '../css/ProductCard.css';
 
 export default class ProductCard extends Component {
   render() {
@@ -10,12 +11,11 @@ export default class ProductCard extends Component {
     } = this.props;
     return (
       <div data-testid="product">
-        <div className="product-card-thumbnail">
-          <img src={ thumbnail } alt={ title } />
-        </div>
+        <img className="product-card-thumbnail" src={ thumbnail } alt={ title } />
         {
           freeShipping && (
             <img
+              className="free-shipping"
               data-testid="free-shipping"
               src="https://cdn-icons-png.flaticon.com/512/411/411776.png"
               alt="frete grátis"

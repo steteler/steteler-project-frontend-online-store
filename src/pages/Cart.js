@@ -30,7 +30,7 @@ export default class Cart extends Component {
     const { items, count } = this.state;
     return (
       <div>
-        <section>
+        <section className="cart-items-conatiner">
           {count === 0
             ? (
               <span data-testid="shopping-cart-empty-message">
@@ -49,7 +49,7 @@ export default class Cart extends Component {
             )}
         </section>
         <div>
-          <Link to="/checkout" data-testid="checkout-products">
+          <Link id="cart-finish-button" to="/checkout" data-testid="checkout-products">
             <button type="button">
               Finalizar compra
             </button>
