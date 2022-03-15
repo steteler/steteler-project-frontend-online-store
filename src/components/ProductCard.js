@@ -3,12 +3,25 @@ import PropTypes from 'prop-types';
 
 export default class ProductCard extends Component {
   render() {
-    const { product, product: { price, title, thumbnail }, addItemToCart } = this.props;
+    const {
+      product,
+      product: { price, title, thumbnail, shipping: { free_shipping: { freeShipping } } },
+      addItemToCart,
+    } = this.props;
     return (
       <div data-testid="product">
         <div>
           <img src={ thumbnail } alt={ title } />
         </div>
+        {
+          freeShipping && (
+            <img
+              data-testid="free-shipping"
+              src="https://cdn-icons-png.flaticon.com/512/411/411776.png"
+              alt="frete grátis"
+            />
+          )
+        }
         <h3>{title}</h3>
         <span>{`${price} R$`}</span>
         <button
