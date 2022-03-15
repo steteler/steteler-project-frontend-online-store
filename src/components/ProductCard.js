@@ -5,12 +5,12 @@ export default class ProductCard extends Component {
   render() {
     const {
       product,
-      product: { price, title, thumbnail, shipping: { free_shipping: { freeShipping } } },
+      product: { price, title, thumbnail, shipping: { free_shipping: freeShipping } },
       addItemToCart,
     } = this.props;
     return (
       <div data-testid="product">
-        <div>
+        <div className="product-card-thumbnail">
           <img src={ thumbnail } alt={ title } />
         </div>
         {
@@ -22,9 +22,10 @@ export default class ProductCard extends Component {
             />
           )
         }
-        <h3>{title}</h3>
+        <h3 className="product-card-title">{title}</h3>
         <span>{`${price} R$`}</span>
         <button
+          className="product-card-add-button"
           type="button"
           data-testid="product-add-to-cart"
           onClick={ (event) => {
@@ -34,7 +35,6 @@ export default class ProductCard extends Component {
         >
           Adicionar ao carrinho
         </button>
-        <hr />
       </div>
     );
   }
